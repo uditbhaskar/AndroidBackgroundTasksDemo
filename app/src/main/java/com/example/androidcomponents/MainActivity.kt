@@ -9,21 +9,31 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.androidcomponents.jobSchedulers.MyJobSchedulers
-import com.example.androidcomponents.ui.theme.AndroidComponentsTheme
 import com.example.androidcomponents.services.ServiceNow
 import com.example.androidcomponents.services.ServiceNowForeground
+import com.example.androidcomponents.ui.theme.AndroidComponentsTheme
 import com.example.androidcomponents.workManager.MyWorkManager
 import java.util.UUID
 
@@ -43,10 +53,10 @@ class MainActivity : ComponentActivity() {
             AndroidComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize().padding(10.dp, 10.dp),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android", onClick = { clickType -> onStartClick(clickType) })
+                    StartComponents(onClick = { clickType -> onStartClick(clickType) })
                 }
             }
         }
@@ -102,44 +112,71 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier, onClick: (ButtonConstants) -> Unit) {
+fun StartComponents(onClick: (ButtonConstants) -> Unit) {
+    var serviceStarted by remember { mutableStateOf(false) }
+    var jobSchedulerStarted by remember { mutableStateOf(false) }
+    var workManagerStarted by remember { mutableStateOf(false) }
     Column {
-        Text(
-            text = "Hello Start $name",
-            modifier = modifier.clickable {
-                onClick(ButtonConstants.START)
+        Button(
+            onClick = {
+                if (serviceStarted) {
+                    onClick(ButtonConstants.STOP)
+                    serviceStarted = false
+                } else {
+                    onClick(ButtonConstants.START)
+                    serviceStarted = true
+                }
             },
-        )
-        Text(
-            text = "End Service",
-            modifier = modifier.clickable {
-                onClick(ButtonConstants.STOP)
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if (serviceStarted) Color.Red else Color.Gray
+            )
+        ) {
+            Text(
+                text = if (serviceStarted) "Stop Service" else "Start Service",
+                color = MaterialTheme.colorScheme.onPrimary)
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(
+            onClick = {
+                if (jobSchedulerStarted) {
+                    onClick(ButtonConstants.JOB_STOP)
+                    jobSchedulerStarted = false
+                } else {
+                    onClick(ButtonConstants.START_JOB_SCHEDULER)
+                    jobSchedulerStarted = true
+                }
             },
-        )
-        Text(
-            text = "Start JobScheduler",
-            modifier = modifier.clickable {
-                onClick(ButtonConstants.START_JOB_SCHEDULER)
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if (jobSchedulerStarted) Color.Red else Color.Gray
+            )
+        ) {
+            Text(
+                text = if (jobSchedulerStarted) "Stop JobScheduler" else "Start JobScheduler",
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(
+            onClick = {
+                if (workManagerStarted) {
+                    onClick(ButtonConstants.STOP_WORK_MANAGER)
+                    workManagerStarted = false
+                } else {
+                    onClick(ButtonConstants.START_WORK_MANAGER)
+                    workManagerStarted = true
+                }
             },
-        )
-        Text(
-            text = "Stop JobScheduler",
-            modifier = modifier.clickable {
-                onClick(ButtonConstants.JOB_STOP)
-            },
-        )
-        Text(
-            text = "Start Work Manager",
-            modifier = modifier.clickable {
-                onClick(ButtonConstants.START_WORK_MANAGER)
-            },
-        )
-        Text(
-            text = "Stop Work Manager",
-            modifier = modifier.clickable {
-                onClick(ButtonConstants.STOP_WORK_MANAGER)
-            },
-        )
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if (workManagerStarted) Color.Red else Color.Gray
+            )
+        ) {
+            Text(
+                text = if (workManagerStarted) "Stop Work Manager" else "Start Work Manager",
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+        }
     }
 }
 
@@ -147,7 +184,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier, onClick: (ButtonConsta
 @Composable
 fun GreetingPreview() {
     AndroidComponentsTheme {
-        Greeting("Android", onClick = {})
+        StartComponents(onClick = {})
     }
 }
 
