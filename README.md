@@ -34,9 +34,9 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 ## License
 
-[MIT License](LICENSE.txt)
+[MIT License](https://github.com/uditbhaskar/AndroidBackgroundTasksDemo#)
 
-This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details.
+This project is licensed under the MIT License - see the [LICENSE.txt](https://github.com/uditbhaskar/AndroidBackgroundTasksDemo#) file for details.
 
 ## Acknowledgments
 
