@@ -54,6 +54,7 @@ class ServiceNowForeground: Service() {
 
     override fun onDestroy() {
         Log.d(tag, endCommand)
+        Toast.makeText(this, "Service ForeGround Stopped", Toast.LENGTH_SHORT).show()
         super.onDestroy()
     }
 }
