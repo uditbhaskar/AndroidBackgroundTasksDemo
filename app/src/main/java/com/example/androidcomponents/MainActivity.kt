@@ -43,17 +43,20 @@ class MainActivity : ComponentActivity() {
     private val tag = "MainActivity"
     private val serviceIntent by lazy { Intent(this, ServiceNow::class.java) }
     private val serviceIntentForeground by lazy { Intent(this, ServiceNowForeground::class.java) }
-    private val jobScheduler by lazy {getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler}
+    private val jobScheduler by lazy { getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler }
     private val workManager by lazy {
         WorkManager.getInstance(this)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             AndroidComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize().padding(10.dp, 10.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp, 10.dp),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     StartComponents(onClick = { clickType -> onStartClick(clickType) })
@@ -79,19 +82,26 @@ class MainActivity : ComponentActivity() {
                 stopService(serviceIntentForeground)
 
             }
+
             ButtonConstants.START_JOB_SCHEDULER -> {
-                val jobInfo = JobInfo.Builder(jobId, ComponentName(this,  MyJobSchedulers::class.java))
-                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                    .build()
+                val jobInfo =
+                    JobInfo.Builder(jobId, ComponentName(this, MyJobSchedulers::class.java))
+                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                        .build()
 
                 jobScheduler.schedule(jobInfo)
             }
+
             ButtonConstants.JOB_STOP -> {
                 jobScheduler.cancel(jobId)
             }
+
             ButtonConstants.START_WORK_MANAGER -> {
-                workManager.enqueue(OneTimeWorkRequestBuilder<MyWorkManager>().setId(workerID).build())
+                workManager.enqueue(
+                    OneTimeWorkRequestBuilder<MyWorkManager>().setId(workerID).build()
+                )
             }
+
             ButtonConstants.STOP_WORK_MANAGER -> {
                 workManager.cancelWorkById(workerID)
             }
@@ -133,7 +143,8 @@ fun StartComponents(onClick: (ButtonConstants) -> Unit) {
         ) {
             Text(
                 text = if (serviceStarted) "Stop Service" else "Start Service",
-                color = MaterialTheme.colorScheme.onPrimary)
+                color = MaterialTheme.colorScheme.onPrimary
+            )
         }
         Spacer(modifier = Modifier.height(8.dp))
 
