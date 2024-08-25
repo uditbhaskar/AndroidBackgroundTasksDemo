@@ -129,13 +129,13 @@ fun Greeting(name: String, modifier: Modifier = Modifier, onClick: (ButtonConsta
             },
         )
         Text(
-            text = "Start WorkOperation",
+            text = "Start Work Manager",
             modifier = modifier.clickable {
                 onClick(ButtonConstants.START_WORK_MANAGER)
             },
         )
         Text(
-            text = "Stop WorkOperation",
+            text = "Stop Work Manager",
             modifier = modifier.clickable {
                 onClick(ButtonConstants.STOP_WORK_MANAGER)
             },
