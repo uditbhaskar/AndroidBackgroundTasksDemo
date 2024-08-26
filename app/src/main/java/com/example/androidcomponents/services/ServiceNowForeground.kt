@@ -10,7 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import com.example.androidcomponents.R.drawable.ic_launcher_background
+import com.example.androidcomponents.R.drawable.ic_launcher_foreground
 
 class ServiceNowForeground: Service() {
 
@@ -34,7 +34,7 @@ class ServiceNowForeground: Service() {
         val notification = NotificationCompat.Builder(this, "your_channel_id")
             .setContentTitle("Service Running") // Set the title of the notification
             .setContentText("This is a foreground service.") // Set the text content of the notification
-            .setSmallIcon(ic_launcher_background) // Set the icon. Replace 'ic_notification' with your own drawable resource
+            .setSmallIcon(ic_launcher_foreground) // Set the icon. Replace 'ic_notification' with your own drawable resource
             .build()
 
         startForeground(1, notification)
