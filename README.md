@@ -1,6 +1,6 @@
 # Android Background Tasks Demo
 
-A comprehensive demonstration of Android background task management techniques using WorkManager, Services, and Job Scheduler.
+A comprehensive demonstration of Android background task management techniques using WorkManager, Foreground Service, and Job Scheduler.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -11,7 +11,7 @@ A comprehensive demonstration of Android background task management techniques u
 
 ## Introduction
 
-This project showcases various methods for managing background tasks in Android applications. It demonstrates the usage of WorkManager, Foreground Services with notifications, and Job Scheduler to handle background operations effectively.
+This project showcases various methods for managing background tasks in Android applications. It demonstrates the usage of WorkManager, Foreground Service with notification, and Job Scheduler to handle background operations effectively.
 
 ## Features
 
