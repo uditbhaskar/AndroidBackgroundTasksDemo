@@ -38,10 +38,10 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.example.androidcomponents.jobSchedulers.MyJobSchedulers
-import com.example.androidcomponents.services.ServiceNowForeground
+import com.example.androidcomponents.backgroundHandle.jobSchedulers.MyJobSchedulers
+import com.example.androidcomponents.backgroundHandle.services.ServiceNowForeground
 import com.example.androidcomponents.ui.theme.AndroidComponentsTheme
-import com.example.androidcomponents.workManager.MyWorkManager
+import com.example.androidcomponents.backgroundHandle.workManager.MyWorkManager
 import java.util.UUID
 
 class MainActivity : ComponentActivity() {

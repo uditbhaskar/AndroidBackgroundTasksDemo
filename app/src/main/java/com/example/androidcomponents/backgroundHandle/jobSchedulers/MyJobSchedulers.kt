@@ -1,12 +1,14 @@
-package com.example.androidcomponents.jobSchedulers
+package com.example.androidcomponents.backgroundHandle.jobSchedulers
 
+import android.annotation.SuppressLint
 import android.app.job.JobParameters
 import android.app.job.JobService
 import android.util.Log
 import android.widget.Toast
 
+@SuppressLint("SpecifyJobSchedulerIdRange")
 class MyJobSchedulers: JobService() {
-    val tag = "MyJobSchedulers"
+    private val tag = "MyJobSchedulers"
 
     override fun onStartJob(params: JobParameters?): Boolean {
         Log.d(tag, "Job started!")

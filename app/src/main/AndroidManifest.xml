@@ -25,15 +25,15 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.ServiceNow" />
+        <service android:name=".backgroundHandle.services.ServiceNow" />
         <service
-            android:name=".services.ServiceNowForeground"
+            android:name=".backgroundHandle.services.ServiceNowForeground"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="dataSync|location|mediaPlayback"/>
 
         <service
-            android:name=".jobSchedulers.MyJobSchedulers"
+            android:name=".backgroundHandle.jobSchedulers.MyJobSchedulers"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
     </application>
