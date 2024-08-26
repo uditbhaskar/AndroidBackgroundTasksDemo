@@ -210,14 +210,14 @@ enum class ButtonConstants {
 fun RequestNotificationPermission() {
     val context = LocalContext.current
     var hasNotificationPermission by remember {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
             mutableStateOf(
                 ContextCompat.checkSelfPermission(
                     context,
                     POST_NOTIFICATIONS
                 ) == PackageManager.PERMISSION_GRANTED
             )
-        } else mutableStateOf(true)
+        else mutableStateOf(true)
     }
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
