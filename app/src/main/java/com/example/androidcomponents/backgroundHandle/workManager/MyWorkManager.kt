@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
-class MyWorkManager(private val context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+class  MyWorkManager(private val context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
     private val tag = "WorkManager"
     private val startCommand = "Work Started"
     private val endCommand = "Work Stopped"
@@ -18,7 +18,7 @@ class MyWorkManager(private val context: Context, workerParams: WorkerParameters
         Handler(Looper.getMainLooper()).post {
             Toast.makeText(context, startCommand, Toast.LENGTH_SHORT).show()
         }
-        Thread.sleep(10000)
+        Thread.sleep(10000000)
         return Result.success()
     }
 

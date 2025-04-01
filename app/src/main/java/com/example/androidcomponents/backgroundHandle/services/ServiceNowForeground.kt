@@ -17,6 +17,7 @@ class ServiceNowForeground: Service() {
     private val tag = "ServiceNowForeground"
     private val startCommand = "Service ForeGround Started"
     private val endCommand = "Service ForeGround Stopped"
+    private val notificationChannelId = "your_channel_id"
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onCreate() {
@@ -28,10 +29,10 @@ class ServiceNowForeground: Service() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(tag, startCommand)
-        Toast.makeText(this, "Service ForeGround Started", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, startCommand, Toast.LENGTH_SHORT).show()
 
 
-        val notification = NotificationCompat.Builder(this, "your_channel_id")
+        val notification = NotificationCompat.Builder(this, notificationChannelId)
             .setContentTitle("Service Running") // Set the title of the notification
             .setContentText("This is a foreground service.") // Set the text content of the notification
             .setSmallIcon(ic_launcher_foreground) // Set the icon. Replace 'ic_notification' with your own drawable resource
@@ -44,7 +45,7 @@ class ServiceNowForeground: Service() {
 
     private fun createNotificationChannel() {
         val channel = NotificationChannel(
-            "your_channel_id",
+            notificationChannelId,
             "Foreground Service Channel",
             NotificationManager.IMPORTANCE_HIGH
         )
@@ -54,7 +55,7 @@ class ServiceNowForeground: Service() {
 
     override fun onDestroy() {
         Log.d(tag, endCommand)
-        Toast.makeText(this, "Service ForeGround Stopped", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, endCommand, Toast.LENGTH_SHORT).show()
         super.onDestroy()
     }
 }
